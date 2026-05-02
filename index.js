@@ -92,6 +92,7 @@ app.listen(port, () => {
 // const client = new messagingApi.MessagingApiClient({
 //   channelAccessToken: config.channelAccessToken
 // });
+
 // const PORT = process.env.PORT || 3000;
 // app.listen(PORT, () => {
 //   console.log(`Server running at http://localhost:${PORT}`);
