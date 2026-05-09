@@ -49,7 +49,7 @@ function handleEvent(event) {
 
 // เพิ่ม GET Method
 app.get('/', (req, res) => {
-  res.send('hello world, Natchaphat');
+  res.send('hello world, Natchaphat Meephian');
 });
 
 
