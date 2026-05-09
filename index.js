@@ -1,21 +1,22 @@
 //Lastest version of line bot sdk: https://www.npmjs.com/package/@line/bot-sdk
+require('dotenv').config();
 
 const express = require('express');
 const line = require('@line/bot-sdk');
 
+// create Express app
+// about Express itself: https://expressjs.com/
+const app = express();
+
 // create LINE SDK config from env variables
 const config = {
-  channelSecret: "a14f87d9cfbc5a027258a29a1f9290a5",
+  channelSecret: process.env.LINE_CHANNEL_SECRET,
 };
 
 // create LINE SDK client
 const client = line.LineBotClient.fromChannelAccessToken({
-  channelAccessToken: "cjQWX5wAD6x2TESH1vvn4gvC3JJRAXdJyc36oOLXB/ww2dxQTvhTu5L/XA/2fiTGdFQ56Zhu0zgDy1v6SFI9c2pk8q1MI/OXAhSk/1o3x2A2uN4JsAlUioj0gqi4gqdG5dq07Jp010JsEs92sxZyvwdB04t89/1O/w1cDnyilFU=",
+  channelAccessToken: process.env.LINE_CHANNEL_ACCESS_TOKEN,
 });
-
-// create Express app
-// about Express itself: https://expressjs.com/
-const app = express();
 
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
@@ -46,8 +47,14 @@ function handleEvent(event) {
   });
 }
 
+// เพิ่ม GET Method
+app.get('/', (req, res) => {
+  res.send('hello world, Natchaphat');
+});
+
+
 // listen on port
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3011;
 app.listen(port, () => {
   console.log(`listening on ${port}`);
 });
@@ -61,8 +68,8 @@ app.listen(port, () => {
 
 // // ตั้งค่าจาก LINE Developers Console
 // const config = {
-//   channelAccessToken: 'cjQWX5wAD6x2TESH1vvn4gvC3JJRAXdJyc36oOLXB/ww2dxQTvhTu5L/XA/2fiTGdFQ56Zhu0zgDy1v6SFI9c2pk8q1MI/OXAhSk/1o3x2A2uN4JsAlUioj0gqi4gqdG5dq07Jp010JsEs92sxZyvwdB04t89/1O/w1cDnyilFU=',
-//   channelSecret: 'a14f87d9cfbc5a027258a29a1f9290a5'
+//   channelAccessToken: process.env.LINE_CHANNEL_ACCESS_TOKEN || "",
+//   channelSecret: process.env.LINE_CHANNEL_SECRET || ""
 // };
 
 // app.use('/webhook', middleware(config));
